@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <title>تسجيل دخول الإدارة</title>
+  <style>
+    body { font-family: Arial; text-align: center; padding: 50px; }
+    input, button { padding: 10px; margin: 10px; width: 250px; }
+    button { background: #007bff; color: white; border: none; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <h1>تسجيل دخول الإدارة</h1>
+  <input type="password" id="passwordInput" placeholder="كلمة المرور" />
+  <br />
+  <button onclick="login()">دخول</button>
+
+  <script>
+    function login() {
+      const pw = document.getElementById("passwordInput").value;
+      if (pw === "wesam090") {
+        window.location.href = "admin/dashboard.html";
+      } else {
+        alert("كلمة المرور خاطئة");
+      }
+    }
+  </script>
+</body>
+</html>

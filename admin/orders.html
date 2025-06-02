@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>سجل الطلبات</title>
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <a href="dashboard.html">← رجوع</a>
+  <h1>سجل الطلبات</h1>
+  <table id="ordersTable">
+    <thead>
+      <tr>
+        <th>رقم الطلب</th>
+        <th>المنتجات</th>
+        <th>الإجمالي</th>
+        <th>التاريخ</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const orders = JSON.parse(localStorage.getItem("orders")) || [];
+    const tbody = document.querySelector("tbody");
+
+    if (orders.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="4">لا توجد طلبات</td></tr>`;
+    } else {
+      orders.forEach(order => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${order.id}</td>
+          <td>${order.items.map(i => i.name).join("، ")}</td>
+          <td>${order.total} ريال</td>
+          <td>${order.date}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+  </script>
+</body>
+</html>

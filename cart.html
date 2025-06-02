@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>السلة</title>
+  <style>
+    body { font-family: Arial; text-align: center; padding: 40px; }
+    .item { margin-bottom: 10px; }
+    button { margin-top: 20px; padding: 10px 20px; background: green; color: white; border: none; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <h1>🛒 سلة المشتريات</h1>
+  <div id="cartItems"></div>
+  <p id="totalPrice"></p>
+  <button onclick="checkout()">تأكيد الطلب</button>
+
+  <script>
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const container = document.getElementById("cartItems");
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+    cart.forEach(item => {
+      const div = document.createElement("div");
+      div.className = "item";
+      div.textContent = `${item.name} - ${item.price} ريال`;
+      container.appendChild(div);
+    });
+    document.getElementById("totalPrice").textContent = `الإجمالي: ${total} ريال`;
+
+    function checkout() {
+      const orders = JSON.parse(localStorage.getItem("orders")) || [];
+      orders.push({
+        id: Date.now(),
+        items: cart,
+        total,
+        date: new Date().toLocaleString()
+      });
+      localStorage.setItem("orders", JSON.stringify(orders));
+      localStorage.removeItem("cart");
+      window.location.href = "confirmation.html";
+    }
+  </script>
+</body>
+</html>

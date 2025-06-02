@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <title>لوحة التحكم</title>
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <a href="orders.html">📄 عرض الطلبات</a>
+  <h1>لوحة التحكم</h1>
+
+  <input type="text" id="productName" placeholder="اسم المنتج" />
+  <input type="number" id="productPrice" placeholder="السعر" />
+  <input type="text" id="productImage" placeholder="رابط الصورة" />
+  <button onclick="addProduct()">➕ إضافة منتج</button>
+
+  <div id="productsList"></div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

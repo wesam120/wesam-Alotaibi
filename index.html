@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>المتجر</title>
+  <style>
+    body { font-family: Arial; text-align: center; background: #f2f2f2; padding: 30px; }
+    .products { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+    .product { background: white; padding: 15px; border-radius: 10px; width: 200px; box-shadow: 0 0 5px #ccc; }
+    .product img { width: 100%; border-radius: 10px; }
+    .top-bar a { margin: 10px; text-decoration: none; background: #007bff; color: white; padding: 10px 15px; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <a href="login.html">لوحة الإدارة 🔒</a>
+    <a href="cart.html">عرض السلة 🛒</a>
+  </div>
+
+  <h1>مرحبًا بك في المتجر</h1>
+  <div class="products" id="productsList"></div>
+
+  <script>
+    const products = JSON.parse(localStorage.getItem("products")) || [
+      { name: "ساعة ذكية", price: 150, image: "images/watch.jpg" },
+      { name: "سماعة بلوتوث", price: 90, image: "images/earbuds.jpg" },
+      { name: "كيبورد ألعاب", price: 120, image: "images/keyboard.jpg" }
+    ];
+    localStorage.setItem("products", JSON.stringify(products));
+
+    const container = document.getElementById("productsList");
+    products.forEach(product => {
+      const div = document.createElement("div");
+      div.className = "product";
+      div.innerHTML = `
+        <img src="${product.image}" alt="${product.name}">
+        <h3>${product.name}</h3>
+        <p>${product.price} ريال</p>
+        <button onclick="addToCart('${product.name}', ${product.price})">أضف إلى السلة</button>
+      `;
+      container.appendChild(div);
+    });
+
+    function addToCart(name, price) {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push({ name, price });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert("تمت إضافة المنتج إلى السلة");
+    }
+  </script>
+</body>
+</html>
